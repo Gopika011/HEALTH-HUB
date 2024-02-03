@@ -65,7 +65,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>HEALTH SUPPORT</h1>
+        <h1>HEALTH SSUPPORT</h1>
     </div>
     <div class="container">
         <input type="text" class="search-bar" placeholder="Search for districts in a state...">
@@ -108,84 +108,78 @@
             });
         }
 
-        // Function to initialize the map and perform nearby search
-        function initMap() {
-            const map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 5,
-                center: { lat: 9.9312, lng: 76.2673 } // Default center
+let map;
+let service;
+let markers = [];
+
+function initMap() {
+  const center = { lat: 40.7128, lng: -74.0060 }; // Change this to the center of the area you want to search
+
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: center,
+    zoom: 12,
+  });
+
+  // Create a PlacesService instance to perform nearby searches
+  service = new google.maps.places.PlacesService(map);
+
+  // Add an event listener to the district search bar
+  document.getElementById("districtSearch").addEventListener("input", function () {
+    const district = this.value;
+    if (district) {
+      // Perform a nearby search for hospitals in the specified district
+      searchHospitalsInDistrict(district);
+    } else {
+      // Clear existing markers
+      markers.forEach(marker => marker.setMap(null));
+      markers = [];
+    }
+  });
+}
+
+function searchHospitalsInDistrict(district) {
+  // Use the Places Library to geocode the district name
+  const geocoder = new google.maps.Geocoder();
+  geocoder.geocode({ address: district }, function (results, status) {
+    if (status === "OK") {
+      const districtLocation = results[0].geometry.location;
+
+      // Perform a nearby search for hospitals within a 5km radius of the district
+      const request = {
+        location: districtLocation,
+        radius: "5000",
+        type: ["hospital"],
+      };
+
+      service.nearbySearch(request, function (results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          // Clear existing markers
+          markers.forEach(marker => marker.setMap(null));
+          markers = [];
+
+          // Add markers for each hospital
+          results.forEach(function (result) {
+            const marker = new google.maps.Marker({
+              position: result.geometry.location,
+              map: map,
+              title: result.name,
             });
+            markers.push(marker);
+          });
 
-            // Add markers for each location
-            locations.forEach(location => {
-                new google.maps.Marker({
-                    position: { lat: location.lat, lng: location.lng },
-                    map,
-                    title: location.name
-                });
-            });
-
-            // Create a PlacesService object
-            const placesService = new google.maps.places.PlacesService(map);
-
-            document.querySelector('.search-bar').addEventListener('change', function() {
-                const district = this.value;
-
-                // Use Geocoding API to get coordinates for the searched district
-                const geocoder = new google.maps.Geocoder();
-                geocoder.geocode({ address: district }, function(results, status) {
-                    if (status === google.maps.GeocoderStatus.OK) {
-                        const districtCoordinates = results[0].geometry.location;
-
-                        // Perform nearby search using the obtained coordinates
-                        performNearbySearch(map, placesService, districtCoordinates);
-                    } else {
-                        console.error('Geocoding failed:', status);
-                    }
-                });
-            });
+          // Zoom in to fit all markers
+          const bounds = new google.maps.LatLngBounds();
+          markers.forEach(function (marker) {
+            bounds.extend(marker.getPosition());
+          });
+          map.fitBounds(bounds);
         }
-
-        // Function to perform nearby search and display markers
-        function performNearbySearch(map, placesService, coordinates) {
-            // Define the search request
-            const request = {
-                location: coordinates,
-                radius: 5000,
-                type: 'hospital'
-            };
-
-            // Perform the nearby search
-            placesService.nearbySearch(request, function(results, status) {
-                if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    // Clear existing markers
-                    markers.forEach(marker => marker.setMap(null));
-                    markers = [];
-
-                    // Add markers for each hospital
-                    results.forEach(result => {
-                        const marker = new google.maps.Marker({
-                            position: result.geometry.location,
-                            map,
-                            title: result.name
-                        });
-                        markers.push(marker);
-                    });
-
-                    // Zoom in to fit all markers
-                    const bounds = new google.maps.LatLngBounds();
-                    markers.forEach(marker => bounds.extend(marker.getPosition()));
-                    map.fitBounds(bounds);
-                }
-            });
-        }
-
-        // Display live notifications and initialize map when the page loads
-        window.onload = function() {
-            displayNotifications();
-            initMap(); // Call initMap directly
-        };
-
-        let markers = []; // Global array to store markers
+      });
+    } else {
+      console.error("Geocode was not successful: " + status);
+    }
+  });
+}
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPWdAqonjOeNGv3HplPpBEkSltrv9xSk4&callback=initMap" async defer></script>
 </body>
