@@ -5,62 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthcare Management System</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .search-bar {
-            width: 50%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        .section {
-            width: 80%;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-        .section h2 {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            margin: 0;
-        }
-        .notification-list {
-            list-style: none;
-            padding: 10px;
-            margin: 0;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        .notification-item {
-            padding: 8px 0;
-            border-bottom: 1px solid #ddd;
-        }
-        #map {
-            height: 400px;
-            width: 100%;
-        }
+        /* Your existing styles here */
     </style>
 </head>
 <body>
@@ -80,49 +25,6 @@
     </div>
 
     <script>
-        const map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 5,
-            center: { lat: 37.7749, lng: -122.4194 } // Default center
-        });
-
-        const placesService = new google.maps.places.PlacesService(map);
-
-        document.querySelector('.search-bar').addEventListener('change', function() {
-            const district = this.value;
-            if (district) {
-                // Perform a nearby search for hospitals in the entered district
-                placesService.nearbySearch({
-                    location: map.getCenter(),
-                    radius: 5000,
-                    type: 'hospital',
-                    keyword: district
-                }, function(results, status) {
-                    if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        // Clear existing markers
-                        markers.forEach(marker => marker.setMap(null));
-                        markers = [];
-
-                        // Add markers for each hospital in the district
-                        results.forEach(result => {
-                            const marker = new google.maps.Marker({
-                                position: result.geometry.location,
-                                map,
-                                title: result.name
-                            });
-                            markers.push(marker);
-                        });
-
-                        // Zoom in to fit all markers
-                        const bounds = new google.maps.LatLngBounds();
-                        markers.forEach(marker => bounds.extend(marker.getPosition()));
-                        map.fitBounds(bounds);
-                    }
-                });
-            }
-        });
-
-        let markers = [];
-
         // Dummy live notifications data
         const notifications = [
             "Possible outbreak of flu reported in city A.",
@@ -142,12 +44,33 @@
             });
         }
 
-        // Display live notifications when the page loads
+        // Dummy locations data
+        const locations = [
+            // Your existing locations here
+        ];
+
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 5,
+                center: { lat: 9.9312, lng: 76.2673 } // Default center
+            });
+
+            // Add markers for each location
+            locations.forEach(location => {
+                new google.maps.Marker({
+                    position: { lat: location.lat, lng: location.lng },
+                    map,
+                    title: location.name
+                });
+            });
+        }
+
+        // Display live notifications and initialize map when the page loads
         window.onload = function() {
             displayNotifications();
+            initMap(); // Call initMap directly
         };
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPWdAqonjOeNGv3HplPpBEkSltrv9xSk4&callback=initMap" async defer></script>
 </body>
 </html>
-
