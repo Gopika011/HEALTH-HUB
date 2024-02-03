@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthcare Management System</title>
+    <title>Healthcare Maaaaanagement System</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -99,16 +99,7 @@
             });
         }
 
-        // Dummy locations data
-        const locations = [
-            { lat: 9.9312, lng: 76.2673, name: "Kochi (Cochin)" },
-            { lat: 8.5241, lng: 76.9366, name: "Thiruvananthapuram (Trivandrum)" },
-            { lat: 11.2588, lng: 75.7804, name: "Kozhikode (Calicut)"},
-            { lat: 9.4981, lng: 76.3388 , name: "Alappuzha (Alleppey)"},
-            { lat: 10.0889, lng: 77.0595, name: "Munnar" },
-            { lat: 11.6850, lng: 76.1307,name: "Wayanad"}
-        ];
-
+        // Function to initialize the map and perform nearby search
         function initMap() {
             const map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 5,
@@ -129,51 +120,54 @@
 
             document.querySelector('.search-bar').addEventListener('change', function() {
                 const district = this.value;
-                console.log('Searched District:', district);
 
-                const districtCoordinates = { lat: 9.9312, lng: 76.2673 }; // Change this to the actual coordinates of the district
+                // Use Geocoding API to get coordinates for the searched district
+                const geocoder = new google.maps.Geocoder();
+                geocoder.geocode({ address: district }, function(results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        const districtCoordinates = results[0].geometry.location;
 
-                if (district) {
-                    // Define the search request
-                    const request = {
-                        location: districtCoordinates,
-                        radius: 5000,
-                        type: 'hospital',
-                        keyword: district
-                    };
+                        // Perform nearby search using the obtained coordinates
+                        performNearbySearch(map, placesService, districtCoordinates);
+                    } else {
+                        console.error('Geocoding failed:', status);
+                    }
+                });
+            });
+        }
 
-                    console.log('Nearby Search Request:', request);
+        // Function to perform nearby search and display markers
+        function performNearbySearch(map, placesService, coordinates) {
+            // Define the search request
+            const request = {
+                location: coordinates,
+                radius: 5000,
+                type: 'hospital'
+            };
 
-                    // Perform the nearby search
-                    placesService.nearbySearch(request, function(results, status) {
-                        console.log('Nearby Search Results:', results);
-                        console.log('Nearby Search Status:', status);
+            // Perform the nearby search
+            placesService.nearbySearch(request, function(results, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    // Clear existing markers
+                    markers.forEach(marker => marker.setMap(null));
+                    markers = [];
 
-                        if (status === google.maps.places.PlacesServiceStatus.OK) {
-                            // Clear existing markers
-                            markers.forEach(marker => marker.setMap(null));
-                            markers = [];
-
-                            // Add markers for each hospital
-                            results.forEach(result => {
-                                const marker = new google.maps.Marker({
-                                    position: result.geometry.location,
-                                    map,
-                                    title: result.name
-                                });
-                                markers.push(marker);
-                            });
-
-                            // Zoom in to fit all markers
-                            const bounds = new google.maps.LatLngBounds();
-                            markers.forEach(marker => bounds.extend(marker.getPosition()));
-                            map.fitBounds(bounds);
-                        }
+                    // Add markers for each hospital
+                    results.forEach(result => {
+                        const marker = new google.maps.Marker({
+                            position: result.geometry.location,
+                            map,
+                            title: result.name
+                        });
+                        markers.push(marker);
                     });
+
+                    // Zoom in to fit all markers
+                    const bounds = new google.maps.LatLngBounds();
+                    markers.forEach(marker => bounds.extend(marker.getPosition()));
+                    map.fitBounds(bounds);
                 }
             });
-
-            let markers = [];
         }
 
         // Display live notifications and initialize map when the page loads
@@ -181,6 +175,8 @@
             displayNotifications();
             initMap(); // Call initMap directly
         };
+
+        let markers = []; // Global array to store markers
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPWdAqonjOeNGv3HplPpBEkSltrv9xSk4&callback=initMap" async defer></script>
 </body>
