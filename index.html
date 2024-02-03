@@ -80,6 +80,49 @@
     </div>
 
     <script>
+        const map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 5,
+            center: { lat: 37.7749, lng: -122.4194 } // Default center
+        });
+
+        const placesService = new google.maps.places.PlacesService(map);
+
+        document.querySelector('.search-bar').addEventListener('change', function() {
+            const district = this.value;
+            if (district) {
+                // Perform a nearby search for hospitals in the entered district
+                placesService.nearbySearch({
+                    location: map.getCenter(),
+                    radius: 5000,
+                    type: 'hospital',
+                    keyword: district
+                }, function(results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        // Clear existing markers
+                        markers.forEach(marker => marker.setMap(null));
+                        markers = [];
+
+                        // Add markers for each hospital in the district
+                        results.forEach(result => {
+                            const marker = new google.maps.Marker({
+                                position: result.geometry.location,
+                                map,
+                                title: result.name
+                            });
+                            markers.push(marker);
+                        });
+
+                        // Zoom in to fit all markers
+                        const bounds = new google.maps.LatLngBounds();
+                        markers.forEach(marker => bounds.extend(marker.getPosition()));
+                        map.fitBounds(bounds);
+                    }
+                });
+            }
+        });
+
+        let markers = [];
+
         // Dummy live notifications data
         const notifications = [
             "Possible outbreak of flu reported in city A.",
@@ -99,41 +142,12 @@
             });
         }
 
-        // Dummy locations data
-        const locations = [
-            { lat: 9.9312, lng: 76.2673, name: "Kochi (Cochin)" },
-            { lat: 8.5241, lng: 76.9366, name: "Thiruvananthapuram (Trivandrum)" },
-            { lat: 11.2588, lng: 75.7804, name: "Kozhikode (Calicut)"},
-            { lat: 9.4981, lng: 76.3388 , name: "Alappuzha (Alleppey)"},
-            { lat: 10.0889, lng: 77.0595, name: "Munnar" },
-            { lat: 11.6850, lng: 76.1307,name: "Wayanad"}
-            //{ lat: 34.0522, lng: -118.2437, name: "Los Angeles" },
-           // { lat: 40.7128, lng: -74.0060, name: "New York" }
-        ];
-
-        // Function to initialize Google Maps
-        function initMap() {
-            const map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 5,
-                center: { lat: 9.9312, lng: 76.2673 } // Default center
-            });
-
-            // Add markers for each location
-            locations.forEach(location => {
-                new google.maps.Marker({
-                    position: { lat: location.lat, lng: location.lng },
-                    map,
-                    title: location.name
-                });
-            });
-        }
-
         // Display live notifications when the page loads
         window.onload = function() {
             displayNotifications();
         };
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPWdAqonjOeNGv3HplPpBEkSltrv9xSk4&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 </body>
 </html>
 
