@@ -80,6 +80,7 @@
     </div>
 
     <script>
+    <script>
         // Dummy live notifications data
         const notifications = [
             "Possible outbreak of flu reported in city A.",
@@ -123,6 +124,50 @@
                     title: location.name
                 });
             });
+
+            // Create a PlacesService object
+            const placesService = new google.maps.places.PlacesService(map);
+
+            document.querySelector('.search-bar').addEventListener('change', function() {
+                const district = this.value;
+                const districtCoordinates = { lat: 9.9312, lng: 76.2673 }; // Change this to the actual coordinates of the district
+
+                if (district) {
+                    // Define the search request
+                    const request = {
+                        location: districtCoordinates,
+                        radius: 5000,
+                        type: 'hospital',
+                        keyword: district
+                    };
+
+                    // Perform the nearby search
+                    placesService.nearbySearch(request, function(results, status) {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            // Clear existing markers
+                            markers.forEach(marker => marker.setMap(null));
+                            markers = [];
+
+                            // Add markers for each hospital
+                            results.forEach(result => {
+                                const marker = new google.maps.Marker({
+                                    position: result.geometry.location,
+                                    map,
+                                    title: result.name
+                                });
+                                markers.push(marker);
+                            });
+
+                            // Zoom in to fit all markers
+                            const bounds = new google.maps.LatLngBounds();
+                            markers.forEach(marker => bounds.extend(marker.getPosition()));
+                            map.fitBounds(bounds);
+                        }
+                    });
+                }
+            });
+
+            let markers = [];
         }
 
         // Display live notifications and initialize map when the page loads
@@ -130,6 +175,7 @@
             displayNotifications();
             initMap(); // Call initMap directly
         };
+
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPWdAqonjOeNGv3HplPpBEkSltrv9xSk4&callback=initMap" async defer></script>
 </body>
