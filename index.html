@@ -129,6 +129,8 @@
 
             document.querySelector('.search-bar').addEventListener('change', function() {
                 const district = this.value;
+                console.log('Searched District:', district);
+
                 const districtCoordinates = { lat: 9.9312, lng: 76.2673 }; // Change this to the actual coordinates of the district
 
                 if (district) {
@@ -140,8 +142,13 @@
                         keyword: district
                     };
 
+                    console.log('Nearby Search Request:', request);
+
                     // Perform the nearby search
                     placesService.nearbySearch(request, function(results, status) {
+                        console.log('Nearby Search Results:', results);
+                        console.log('Nearby Search Status:', status);
+
                         if (status === google.maps.places.PlacesServiceStatus.OK) {
                             // Clear existing markers
                             markers.forEach(marker => marker.setMap(null));
@@ -174,7 +181,6 @@
             displayNotifications();
             initMap(); // Call initMap directly
         };
-
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPWdAqonjOeNGv3HplPpBEkSltrv9xSk4&callback=initMap" async defer></script>
 </body>
