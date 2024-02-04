@@ -1,7 +1,8 @@
 # HEALTH-HUB
 AGNARK
 Integrated Healthcare Platform for Timely Disease Surveillance and Medical
-Camp Management
+Camp Management.
+
 This project aims to develop a web-based platform tailored for medical
 professionals to facilitate the organization of medical camps in areas lacking
 healthcare infrastructure and to stay informed about disease outbreaks. The
