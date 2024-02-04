@@ -1,28 +1,40 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: left;
-    margin-left: 200px;
+    text-align: center; /* Center text */
     background-color: #f2f2f2;
-    display: flex;  /* Use flex container */
-    justify-content: flex-start;  /* Align content to the left */
-    flex-direction: column; /* Stack children vertically */
-    align-items: flex-start; /* Align items to the start (top) of the container */
-   
-    height: 100vh;  /* Full height of the viewport */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    height: 100vh;
 }
 
 h1 {
     color: #333;
 }
 
+#main {
+    display: flex;
+    align-items: center; /* Center items horizontally */
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%; /* Adjusted width to center content */
+    max-width: 1200px; /* Maximum width for better responsiveness */
+}
+
+#formsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+}
+
 #loginForm, #registerForm {
     width: 300px;
-    margin-right: 20px;  /* Add margin to the right for spacing */
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 label {
@@ -58,7 +70,20 @@ button:active {
     display: none;
 }
 
+#imageContainer {
+    flex-grow: 10;
+    margin-left: 30px; /* Add margin to the left of the image container */
+   
+}
+
+#imageContainer img {
+   
+    height: 600;
+    width: 600;
+    max-width: 950px; /* Set a maximum width for the image */
+}
+
 button.toggleButton {
     background-color: #3498db;
-    color:#3498db
+    color: #3498db;
 }
