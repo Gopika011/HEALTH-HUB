@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .search-bar {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .section {
+            width: 80%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            margin: 0;
+        }
+        .notification-list {
+            list-style: none;
+            padding: 10px;
+            margin: 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .notification-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="makeGetRequest()">Make GET Request</button>
+
+    <div class="header">
+        <h1>HEALTH SUPPORT</h1>
+    </div>
+    <div class="container">
+        <input type="text" class="search-bar" placeholder="Search for districts in a state..." id="districtSearch">
+        <div class="section" id="notifications">
+            <h2>Live Notifications</h2>
+            <ul class="notification-list" id="notificationList"></ul>
+        </div>
+        <div class="section">
+            <h2>Remote Locations Map</h2>
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script>
+        function makeGetRequest() {
+            const url = 'http://127.0.0.1:5000/hospital';
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && data.data) {
+                        // Check if data and data.data are defined
+                        displayNotifications(data.data);
+                    } else {
+                        console.error('Invalid data format:', data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function displayNotifications(notifications) {
+            const notificationList = document.getElementById('notificationList');
+            notificationList.innerHTML = '';
+            
+            if (notifications && notifications.length > 0) {
+                // Check if notifications is defined and not empty
+                notifications.forEach(notification => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${notification.district}: ${notification.diseaseName}, Cases: ${notification.numberOfCases}`;
+                    listItem.classList.add('notification-item');
+                    notificationList.appendChild(listItem);
+                });
+            } else {
+                console.error('Data is undefined or empty.');
+            }
+        }
+    </script>
+
+</body>
+</html>
