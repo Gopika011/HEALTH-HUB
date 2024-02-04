@@ -1,0 +1,128 @@
+hospitalName,district,diseaseName,numberOfCases
+Oceanfront Medical Center,Thiruvananthapuram,COVID-19,130
+Harmony Health Clinic,Kollam,Malaria,18
+Eagle's Nest Hospital,Ernakulam,Dengue,42
+Green Oasis Medical Center,Kottayam,Influenza,28
+Pinnacle Wellness Center,Malappuram,Typhoid,12
+Seaview General Hospital,Kozhikode,Chikungunya,20
+Summit Ridge Clinic,Kannur,COVID-19,110
+Azure Sky Hospital,Palakkad,Dengue,48
+Emerald Isle Clinic,Idukki,Malaria,24
+Bayside General Hospital,Alappuzha,Influenza,32
+Zenith Medical Foundation,Pathanamthitta,COVID-19,85
+Rainforest Healthcare,Thrissur,Chikungunya,18
+Sapphire Springs Clinic,Wayanad,Typhoid,15
+Diamond Heights Medical Center,Ernakulam,Malaria,55
+Seascape Health Pavilion,Kollam,Influenza,30
+Topaz Health Services,Kottayam,Dengue,42
+Mountain Crest Clinic,Malappuram,COVID-19,75
+Crystal Wellness Center,Kozhikode,Chikungunya,25
+Coral Coast Clinic,Kannur,Typhoid,20
+Sunset Bay Hospital,Palakkad,Malaria,38
+hospitalName,district,diseaseName,numberOfCases
+Marine Health Center,Thiruvananthapuram,COVID-19,140
+Harbor Medical Pavilion,Kollam,Malaria,25
+Skyline General Hospital,Ernakulam,Dengue,38
+Rainbow Wellness Clinic,Kottayam,Influenza,33
+Summit Health Hub,Malappuram,Typhoid,16
+Emerald Coast Medical Center,Kozhikode,Chikungunya,22
+Crystal Clinic,Kannur,COVID-19,105
+Sunrise Medical Foundation,Palakkad,Dengue,55
+Golden Valley Hospital,Idukki,Malaria,28
+Seaside Wellness Center,Alappuzha,Influenza,36
+Evergreen Medical Services,Pathanamthitta,COVID-19,88
+Topaz Healthcare,Thrissur,Chikungunya,20
+Sapphire Medical Center,Wayanad,Typhoid,18
+Blue Sky Clinic,Ernakulam,Malaria,60
+Seascape Health Pavilion,Kollam,Influenza,27
+Silver Springs Medical Hub,Kottayam,Dengue,50
+Mountain Ridge Clinic,Malappuram,COVID-19,70
+Diamond Wellness Center,Kozhikode,Chikungunya,18
+Coral Cove Hospital,Kannur,Typhoid,22
+Sunset Bay Medical Center,Palakkad,Malaria,40
+Hospital Name,District,Disease Name,Number of Cases in Kerala
+ABC Medical Center,Trivandrum,Influenza,1500
+XYZ General Hospital,Ernakulam,Dengue,800
+Sunshine HealthCare,Kozhikode,Malaria,300
+Unity Hospital,Thrissur,COVID-19,5000
+Hope Medical Institute,Malappuram,Tuberculosis,200
+Greenfield Clinic,Kollam,Chikungunya,100
+Lakeside Medical,Palakkad,Hepatitis,250
+Harmony Health,Alappuzha,Typhoid,120
+Serenity Hospital,Kannur,Measles,50
+Oceanview Clinic,Kottayam,Leptospirosis,180
+Hospital Name,District,Disease Name,Number of Cases in Kerala
+ABC Medical Center,Trivandrum,Influenza,1500
+XYZ General Hospital,Ernakulam,Dengue,800
+Sunshine HealthCare,Kozhikode,Malaria,300
+Unity Hospital,Thrissur,COVID-19,5000
+Hope Medical Institute,Malappuram,Tuberculosis,200
+Greenfield Clinic,Kollam,Chikungunya,100
+Lakeside Medical,Palakkad,Hepatitis,250
+Harmony Health,Alappuzha,Typhoid,120
+Serenity Hospital,Kannur,Measles,50
+Oceanview Clinic,Kottayam,Leptospirosis,180
+Rainbow Hospital,Idukki,Chickenpox,90
+Golden Gate Medical,Pathanamthitta,Cholera,75
+Silverline Clinic,Wayanad,Yellow Fever,30
+Sunrise Hospital,Kasaragod,Zika Virus,10
+Blue Sky Medical,Thiruvalla,Dengue,450
+Evergreen Health,Palakkad,Malaria,150
+Valley View Hospital,Kochi,COVID-19,7000
+Royal Care Hospital,Kollam,Typhoid,80
+Emerald Medical Center,Alappuzha,Hepatitis,300
+Seaside Clinic,Kozhikode,Chikungunya,50
+Aster MedCity,Kochi,COVID-19,5500
+Palm Grove Hospital,Thrissur,Influenza,300
+Hilltop Medical,Kannur,Tuberculosis,180
+Moonlight Clinic,Trivandrum,Measles,40
+Pristine Health,Malappuram,Leptospirosis,120
+Oceanic Hospital,Ernakulam,Dengue,700
+Greenland Medical,Kottayam,Cholera,60
+Sapphire Hospital,Kasaragod,Yellow Fever,25
+Hospital Name,District,Disease Name,Number of Cases in Kerala
+ABC Medical Center,Trivandrum,Influenza,1500
+XYZ General Hospital,Ernakulam,Dengue,800
+Sunshine HealthCare,Kozhikode,Malaria,300
+Unity Hospital,Thrissur,COVID-19,5000
+Hope Medical Institute,Malappuram,Tuberculosis,200
+Greenfield Clinic,Kollam,Chikungunya,100
+Lakeside Medical,Palakkad,Hepatitis,250
+Harmony Health,Alappuzha,Typhoid,120
+Serenity Hospital,Kannur,Measles,50
+Oceanview Clinic,Kottayam,Leptospirosis,180
+Rainbow Hospital,Idukki,Chickenpox,90
+Golden Gate Medical,Pathanamthitta,Cholera,75
+Silverline Clinic,Wayanad,Yellow Fever,30
+Sunrise Hospital,Kasaragod,Zika Virus,10
+Blue Sky Medical,Thiruvalla,Dengue,450
+Evergreen Health,Palakkad,Malaria,150
+Valley View Hospital,Kochi,COVID-19,7000
+Royal Care Hospital,Kollam,Typhoid,80
+Emerald Medical Center,Alappuzha,Hepatitis,300
+Seaside Clinic,Kozhikode,Chikungunya,50
+Aster MedCity,Kochi,COVID-19,5500
+Palm Grove Hospital,Thrissur,Influenza,300
+Hilltop Medical,Kannur,Tuberculosis,180
+Moonlight Clinic,Trivandrum,Measles,40
+Pristine Health,Malappuram,Leptospirosis,120
+Oceanic Hospital,Ernakulam,Dengue,700
+Greenland Medical,Kottayam,Cholera,60
+Sapphire Hospital,Kasaragod,Yellow Fever,25
+Golden Horizon Clinic,Palakkad,Chikungunya,80
+Sunset Health,Kollam,Malaria,200
+Emerald Oasis Hospital,Alappuzha,COVID-19,6000
+Tropical Care Center,Kannur,Influenza,200
+Azure Medical,Kochi,Dengue,600
+Bayside Hospital,Trivandrum,Tuberculosis,150
+Crystal Clear Clinic,Malappuram,Typhoid,100
+Island Health,Wayanad,Leptospirosis,80
+Rainforest Medical,Kottayam,Malaria,120
+Mystic Grove Hospital,Thrissur,COVID-19,4800
+Silver Lining Clinic,Kasaragod,Chikungunya,40
+Mountain View Hospital,Pathanamthitta,Measles,30
+Sunbeam Health,Kozhikode,Hepatitis,200
+Harbor MedCare,Ernakulam,Dengue,450
+Elysium Clinic,Palakkad,COVID-19,5500
+Pacific Shore Hospital,Trivandrum,Tuberculosis,100
+Sunset Haven Clinic,Kochi,Yellow Fever,20
